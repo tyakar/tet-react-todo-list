@@ -1,23 +1,22 @@
 import logo from './logo.svg';
 import './App.css';
+import ToDoList from "./components/ToDoList";
+import Footer from "./components/Footer";
+import Header from "./components/Header";
+import { useState,useEffect } from "react";
 
 function App() {
-  return (
+    const [todos, setTodos] = useState();
+
+    const toDoCallback =(data) =>{
+        setTodos(data);
+    };
+    return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <Header/>
+        <ToDoList toDoCallback={toDoCallback}/>
+        <Footer totalTasks={todos?.length}
+                doneTasks={todos?.filter((todo) =>todo.status ===1 ).length} />
     </div>
   );
 }
